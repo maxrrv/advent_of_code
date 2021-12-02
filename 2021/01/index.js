@@ -1,19 +1,9 @@
-const https = require('https')
-const config = require('../config').default
+const httpsPromise = require('../httpsPromise').default
 
-const handleResponse = (response) => {
-let list = ''
-
-response.on('data', data => list += data)
-response.on('end', () => calculateResult(list))
-}
-
-https.get(config('/2021/day/1/input'), handleResponse)
-     .on('error', error => console.log('something went wrong', error))
+httpsPromise('/2021/day/1/input').then(data => calculateResult(data))
 
 const calculateResult = data => {
-  const arrayOfDepthMeasures = getArrayFromString(data)
-  const integerArrayOfDepthMeasures = arrayOfDepthMeasures.map(x => parseInt(x))
+  const integerArrayOfDepthMeasures = data.map(x => parseInt(x))
 
   const resultTaskOne = integerArrayOfDepthMeasures.reduce(countDepthMeasures, 0)
   const resultTaskTwo = integerArrayOfDepthMeasures.reduce(countSlidingWindowOfDepthMeasures, 0)
@@ -21,8 +11,6 @@ const calculateResult = data => {
   printResult('task one result', resultTaskOne)
   printResult('task two result', resultTaskTwo)
 }
-
-const getArrayFromString = (values) => values.split(/\n/)
 
 const countDepthMeasures = (previousCount, currentDepth, currentIndex, depthMeasurements) => {
   if ( currentDepth < depthMeasurements[currentIndex +1] ) {
