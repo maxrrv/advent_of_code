@@ -24,8 +24,10 @@ const BgMagenta = "\x1b[45m"
 const BgCyan = "\x1b[46m"
 const BgWhite = "\x1b[47m"
 
-const printResult = (explanation, value) => {
-  console.log(`${Underscore}${explanation}${FgGreen}${value}`)
-}
+const printResult = (explanation, value) => console.log(`${Underscore}${explanation}${FgGreen}${value}`)
+
+const debug = valueToDebug => console.log(`${FgYellow}${valueToDebug}`)
 
 module.exports.printResult = printResult
+module.exports.debug = debug
+
