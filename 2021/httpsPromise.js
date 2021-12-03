@@ -11,6 +11,7 @@ const httpsPromise = path => {
       response.on('data', data => list += data)
 
       response.on('end', () => {
+        list = list.trim()
         const normalizedArray = getArrayFromInputString(list)
         return resolve(normalizedArray)
       })
