@@ -1,30 +1,51 @@
 const httpsPromise = require('../httpsPromise').default
+const printResult = require('../prettyPrint').printResult
 
-httpsPromise('/2021/day/2/input')
-  .then(data => {
-    let forward = 0
-    let depth = 0
-    data.map(entry => {
-      let [direction, value] = entry.split(' ')
-      value = parseInt(value)
+const solutionTaskOne = (data) => {
+  let forward = 0
+  let depth = 0
 
-      if(direction === 'forward') {
-        forward += value
-      }
-      if(direction === 'down') {
-        depth += value
-      }
-      if(direction === 'up') {
-        depth -= value
-      }
+  data.map(entry => {
+    let [direction, value] = entry.split(' ')
+    value = parseInt(value)
 
-      console.log(direction, value)
-    })
-    console.log({forward, depth})
-    console.log(forward * depth)
-
+    if(direction === 'forward') {
+      forward += value
+    }
+    if(direction === 'down') {
+      depth += value
+    }
+    if(direction === 'up') {
+      depth -= value
+    }
   })
 
-//todo split each entry into text and value
-//depending on the text, we want to increment forward movement or increment/decrement depth
-//when we are done, we want to multiply both values
+  printResult("Forward * Depth: ", forward*depth)
+}
+
+const solutionTaskTwo = (data) => {
+  let forward = 0
+  let aim = 0
+  let depth = 0
+
+  data.map(entry => {
+    let [direction, value] = entry.split(' ')
+    value = parseInt(value)
+
+    if(direction === 'forward') {
+      forward += value
+      depth += aim * value
+    }
+    if(direction === 'down') {
+      aim += value
+    }
+    if(direction === 'up') {
+      aim -= value
+    }
+  })
+
+  printResult("Forward * Depth: ", forward*depth)
+}
+
+httpsPromise('/2021/day/2/input')
+  .then(solutionTaskTwo)
