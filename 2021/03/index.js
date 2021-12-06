@@ -7,20 +7,6 @@ const solutionTaskOne = data => {
 }
 
 const solutionTaskTwo = data => {
-  data = [
-'00100',
-'11110',
-'10110',
-'10111',
-'10101',
-'01111',
-'00111',
-'11100',
-'10000',
-'11001',
-'00010',
-'01010',
-  ]
   let [oxygenPattern, co2Pattern] = getMaxMinPattern(data)
 
   const oxygenRating = filterByPattern(oxygenPattern, data)
@@ -44,6 +30,14 @@ const filterByPattern = (pattern, listToFilter) => {
 const getMajorityCount = (data, amountOfOnes) => amountOfOnes < Math.round(data.length/2) ? '0' : '1'
 const getMinorityCount = (data, amountOfOnes) => amountOfOnes < Math.round(data.length/2) ? '1' : '0'
 
+// while dataset.length > 1 do
+// get dominant number in column x
+// filter data by dominant number in column x
+
+const getDominantNumberInColumn = (column, data) => {
+
+}
+
 const getMaxMinPattern = (itemList) => {
   maxPattern = ''
   minPattern = ''
@@ -64,3 +58,4 @@ httpsPromise('/2021/day/3/input')
   .then(solutionTaskTwo)
   .then(result => printResult('result: ', result))
 
+module.exports.solutionTaskTwo = solutionTaskTwo
